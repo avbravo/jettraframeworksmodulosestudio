@@ -1,0 +1,226 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Empleado</h1>
+    <p>Representa los empleados de la organizacion.</p>
+    
+    <h2 id="p1"></h2>
+    <button class="btn btn-success mb-4" name="newEmployeeButton" id="newEmployeeButton">Add Employee</button>
+    <!-- Employee Table -->
+    <!--<table id="employeesTable" class="table table-bordered table-dark min-w-full bg-white">-->
+   
+    
+    <div class="w-full mt-6">
+    <p class="text-xl pb-3 flex items-center">
+        <i class="fas fa-list mr-3"></i> Empleado
+    </p>
+    <div class="bg-white overflow-auto">
+        <table class="min-w-full bg-white" id="employeesTable">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Id</th>
+                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">FirstName</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">LastName</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">JobTitle</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">               
+            </tbody>
+        </table>
+    </div>
+    <p class="pt-3 text-gray-600">
+       Empleados
+    </p>
+</div>
+</div>
+
+
+
+
+
+
+
+<!-- Employee Modal -->
+<div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="employeeModalLabel">Add Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="employeeForm">
+
+                    <div class="form-group">
+                        <label for="employeeID">Employee ID:</label>
+                        <input type="number" class="form-control" id="employeeID" name="employeeID"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">firstname:</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname"  required 
+                               title="Firstname" placeholder="Enter First Name"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname">lastname:</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" required
+                               title="Last name" placeholder="Enter Last Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle">jobTitle:</label>
+                        <input type="text" class="form-control" id="jobTitle" name="jobTitle" required
+                               title="jobTitle" placeholder="Enter jobTitle"
+                               />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="saveButton">Save</button>
+                    <button type="button" class="btn btn-primary" id="updateButton">Update</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>    
+    $(document).ready(function () {
+       
+        function loadEmployees() {
+            $.ajax({
+                url: '/api/employees',
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (data) {                                     
+                    var tableBody = $('#employeesTable tbody');
+                    tableBody.empty();
+                    data.forEach(function (employee) {
+                        console.log(employee);
+                        var row = '<tr>' +
+                                '<td class="w-1/3 text-left py-3 px-4">' + employee.id + '</td>' +
+                                '<td class="w-1/3 text-left py-3 px-4">' + employee.firstname + '</td>' +
+                                '<td class="text-left py-3 px-4">' + employee.lastname + '</td>' +
+                                '<td class="text-left py-3 px-4">' + employee.jobTitle + '</td>' +
+                                '<td class="table-buttons">' +
+                                '<button class="btn btn-sm btn-primary mr-1" onclick="editEmployee(\'' + employee.id + '\')">Edit</button>' +
+                                '<button class="btn btn-sm btn-danger" onclick="deleteEmployee(\'' + employee.id + '\')">Delete</button>' +
+                                '</td>' +
+                                '</tr>';
+                        tableBody.append(row);
+                    });
+                    
+                  
+                    
+                }
+                ,
+        error: function (request, status, error) {
+            alert(jQuery.parseJSON(request.responseText).Message);
+        }
+               
+            });
+        }
+
+
+
+
+
+        loadEmployees();
+       
+
+        $('#newEmployeeButton').on('click', function () {
+            $('#employeeForm')[0].reset();
+            $('#employeeID').closest('.form-group').hide();
+            $('#employeeModalLabel').text('Add Employee');
+            $('#saveButton').show();
+            $('#updateButton').hide();
+            $('#employeeModal').modal('show');
+            loadEmployees();
+        });
+
+        $('#employeeForm').on('submit', function (e) {
+            e.preventDefault();
+            var employee = {
+                firstname: $('#firstname').val(),
+                lastname: $('#lastname').val(),
+                jobTitle: $('#jobTitle').val(),
+
+            };
+            $.ajax({
+                url: '/api/employees',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(employee),
+                success: function () {
+                    loadEmployees();
+                    $('#employeeModal').modal('hide');
+                    $('#employeeForm')[0].reset();
+                }
+            });
+        });
+
+        $('#updateButton').on('click', function () {
+
+            console.log('click oin update');
+            var employee = {
+                id: $('employeeID').val(),
+                firstname: $('#firstname').val(),
+                lastname: $('#lastname').val(),
+                jobTitle: $('#jobTitle').val(),
+
+            };
+            console.log('click paso 2');
+            $.ajax({
+                url: '/api/employees',
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(employee),
+                success: function () {
+                    loadEmployees();
+                    $('#employeeModal').modal('hide');
+                    $('#employeeForm')[0].reset();
+                }
+            });
+            console.log("click paso 3");
+        });
+
+
+
+
+        window.editEmployee = function (employeeID) {
+            console.log("edit ");
+            $.ajax({
+                url: '/api/employees/' + employeeID,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (employee) {
+                    $('#employeeID').val(employee.id).prop('disabled', true).closest('.form-group').show();
+                    $('#firstname').val(employee.firstname);
+                    $('#lastname').val(employee.lastname);
+                    $('#jobTitle').val(employee.jobTitle);
+                    $('#employeeModalLabel').text('Edit Employee');
+                    $('#saveButton').hide();
+                    $('#updateButton').show();
+                    $('#employeeModal').modal('show');
+                }
+
+
+            });
+
+        };
+
+        window.deleteEmployee = function (employeeID) {
+            $.ajax({
+                url: '/api/employees/' + employeeID,
+                method: 'DELETE',
+                success: function () {
+                    loadEmployees();
+                }
+            });
+        };
+
+
+    });
+
+</script>

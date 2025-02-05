@@ -1,0 +1,305 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Country</h1>
+    <p>Representa los empleados de la organizacion.</p>
+
+    <h2 id="p1"></h2>
+  
+
+
+
+    <button class="btn btn-success mb-4" name="newCountryButton" id="newCountryButton">Add Country</button>
+    <!-- Country Table -->
+    <!--<table id="countrysTable" class="table table-bordered table-dark min-w-full bg-white">-->
+
+
+    <div class="w-full mt-6">
+        <p class="text-xl pb-3 flex items-center">
+            <i class="fas fa-list mr-3"></i> Country
+        </p>
+        <div class="bg-white overflow-auto">
+            <table class="min-w-full bg-white" id="countryTable">
+                <thead class="bg-gray-800 text-white">
+                    <tr>
+                        <th class="text-left py-3 px-4 uppercase font-semibold text-sm">IdCountry</th>
+                        <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Country</th>
+                        <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">               
+                </tbody>
+            </table>
+        </div>
+        <p class="pt-3 text-gray-600">
+            Countru
+        </p>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Country Modal -->
+<div class="modal fade" id="countryModal" tabindex="-1" role="dialog" aria-labelledby="countryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="countryModalLabel">Add Country</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="countryForm">
+
+                    <div class="form-group">
+                        <label for="countryID">Country ID:</label>
+                        <input type="text" class="form-control" id="countryID" name="countryID"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">country:</label>
+                        <input type="text" class="form-control" id="country" name="country"  required 
+                               title="Country" placeholder="Enter Country"/>
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-primary" id="saveButton">Save</button>
+                    <button type="button" class="btn btn-primary" id="updateButton">Update</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="countryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="countryDeleteModalLabel">Delete Country</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="countryDeleteForm">
+
+                    <div class="form-group">
+                        <label for="countryID">Country ID:</label>
+                        <input type="text" class="form-control" id="countryIDDelete" name="countryIDDelete"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">country:</label>
+                        <input type="text" class="form-control" id="countryDelete" name="countryDelete"  required 
+                               title="Country" placeholder="Enter Country"/>
+                    </div>
+
+                </form>
+
+                <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                    <!--                    <button type="button" class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="deleteModal">
+                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>-->
+                    <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                    <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to delete this item?</p>
+                    <div class="flex justify-center items-center space-x-4">
+                        <button data-modal-toggle="deleteModal"
+                                type="button" 
+                                data-dismiss="modal"
+                                class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                            No, cancel
+                        </button>
+                        <button type="submit" 
+                                id="deleteContryButton"
+                                name="deleteCountryButton"
+                                class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            Yes, I'm sure
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        function loadCountrys() {
+            $.ajax({
+                url: '/api/country',
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    var tableBody = $('#countryTable tbody');
+                    tableBody.empty();
+                    data.forEach(function (country) {
+                        console.log(country);
+                        var row = '<tr>' +
+                                '<td class="w-1/3 text-left py-3 px-4">' + country.idcountry + '</td>' +
+                                '<td class="w-1/3 text-left py-3 px-4">' + country.country + '</td>' +
+                                '<td class="table-buttons">' +
+                                '<button class="btn btn-sm btn-primary mr-1" onclick="editCountry(\'' + country.idcountry + '\')">Edit</button>' +
+                                '<button class="btn btn-sm btn-danger" onclick="deleteCountry(\'' + country.idcountry + '\')">Delete</button>' +
+                                '</td>' +
+                                '</tr>';
+                        tableBody.append(row);
+                    });
+
+
+
+                }
+                ,
+                error: function (request, status, error) {
+                    alert(jQuery.parseJSON(request.responseText).Message);
+                }
+
+            });
+        }
+
+
+
+
+
+        loadCountrys();
+
+
+        $('#newCountryButton').on('click', function () {
+            $('#countryForm')[0].reset();
+            $('#countryModalLabel').text('Add Country');
+            $('#saveButton').show();
+            $('#updateButton').hide();
+            $('#countryModal').modal('show');
+            loadCountrys();
+        });
+       
+
+        $('#countryForm').on('submit', function (e) {
+            e.preventDefault();
+            var country = {
+                idcountry: $('#countryID').val(),
+                country: $('#country').val(),
+            };
+            $.ajax({
+                url: '/api/country',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(country),
+                success: function () {
+                    loadCountrys();
+                    $('#countryModal').modal('hide');
+                    $('#countryForm')[0].reset();
+                }
+            });
+        });
+
+        $('#updateButton').on('click', function () {
+            console.log("::::::::::::::::::::::::::::::::::");
+            console.log(" countryID " + $('#countryID').val());
+            console.log("updateButton");
+            var country = {
+                idcountry: $('#countryID').val(),
+                country: $('#country').val(),
+
+            };
+            console.log("country.idcountry " + country.idcountry);
+            console.log("country.country " + country.country);
+            $.ajax({
+                url: '/api/country',
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(country),
+                success: function () {
+                    loadCountrys();
+                    $('#countryModal').modal('hide');
+                    $('#countryForm')[0].reset();
+                }
+            });
+
+        });
+
+
+
+
+        window.editCountry = function (countryID) {
+            $.ajax({
+                url: '/api/country/' + countryID,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (country) {
+                    $('#countryID').val(country.idcountry).prop('disabled', true).closest('.form-group').show();
+                    $('#country').val(country.country);
+                    $('#countryModalLabel').text('Edit Country');
+                    $('#saveButton').hide();
+                    $('#updateButton').show();
+                    $('#countryModal').modal('show');
+                }
+
+
+            });
+
+        };
+
+        window.deleteCountry = function (countryID) {
+
+            $.ajax({
+                url: '/api/country/' + countryID,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (country) {
+                    $('#countryIDDelete').val(country.idcountry).prop('disabled', true).closest('.form-group').show();
+                    $('#countryDelete').val(country.country).prop('disabled', true).closest('.form-group').show();
+                    $('#countryDeleteModalLabel').text('Delete Country');
+
+                    $('#deleteModal').modal('show');
+                }
+
+
+            });
+        };
+
+
+   $('#deleteContryButton').on('click', function () {
+            console.log("::::::::::::::::::::::::::::::::::");
+            console.log(" countryID " + $('#countryIDDelete').val());
+            console.log("deleteContryButton");
+
+             $.ajax({
+                url: '/api/country/' + $('#countryIDDelete').val(),
+                method: 'DELETE',
+                success: function () {
+                    $('#deleteModal').modal('hide');
+                    loadCountrys();
+                }
+            });
+            
+           
+
+        });
+        window.deleteCountryOld = function (countryID) {
+
+
+            $.ajax({
+                url: '/api/country/' + countryID,
+                method: 'DELETE',
+                success: function () {
+                    loadCountrys();
+                }
+            });
+        };
+
+
+    });
+
+</script>
+

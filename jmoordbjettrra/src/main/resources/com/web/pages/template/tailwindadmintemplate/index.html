@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tailwind Admin Template</title>
+        <meta name="author" content="David Grzyb">
+        <meta name="description" content="">
+
+        <!-- -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link href="https://getbootstrap.com/docs/4.0/examples/dashboard/dashboard.css" rel="stylesheet">
+        <!-- Graficas -->
+        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- Mapas -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+
+        <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
+        <script type="module"  src="https://unpkg.com/@material-tailwind/html@latest/scripts/popover.js"></script>
+
+        <!--<link rel="stylesheet" href="css/pico.min.css">-->
+
+        <!-- Bootstrap Icons CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+        
+<!-- JQuery Dialog -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+
+
+        <!-- Tailwind -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+            .font-family-karla {
+                font-family: karla;
+            }
+            .bg-sidebar {
+                background: #3d68ff;
+            }
+            .cta-btn {
+                color: #3d68ff;
+            }
+            .upgrade-btn {
+                background: #1947ee;
+            }
+            .upgrade-btn:hover {
+                background: #0038fd;
+            }
+            .active-nav-link {
+                background: #1947ee;
+            }
+            .nav-item:hover {
+                background: #1947ee;
+            }
+            .account-link:hover {
+                background: #3d68ff;
+            }
+        </style>
+
+
+
+    </head>
+    <body class="bg-gray-100 font-family-karla flex">
+
+        <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
+            <div class="p-6">
+                <a href="#" id="dashboardMainLink" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Jettra</a>
+            </div>
+
+
+
+
+            <nav class="text-white text-base font-semibold pt-3">
+
+                <a href="#" id="dashboardLink" class="flex items-center active-nav-link text-white py-2 pl-6 nav-item">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
+                </a>
+
+                <a href="#" data-popover-target="menu"  class="flex items-center active-nav-link text-white py-2 pl-6 nav-item">
+                    <i class="fas fa-tv-retro mr-3"></i>
+                    Componentes
+                </a>
+
+                <!--                   <img
+                                    alt="tania andrew"
+                                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+                                    class="relative inline-block h-10 w-10 cursor-pointer rounded-full object-cover object-center"
+                                    data-popover-target="menu"
+                                    title="Componentes"
+                                    />-->
+
+
+                <ul
+                    role="menu"
+                    data-popover="menu"
+                    data-popover-placement="bottom"
+                    class="absolute z-10 min-w-[180px] overflow-auto rounded-lg border border-slate-200 bg-blue-900 p-1.5 shadow-lg shadow-sm focus:outline-none"
+                    >
+
+                    <li>
+                        <a href="#" id="empleadoLink"
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                            <i class="fas fa-calendar mr-3"></i>
+                            Empleado
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="graficaLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                            <i class="fas fa-calendar mr-3"></i>
+                            Grafica
+                        </a>  </li>
+                    <li>
+                        <a href="#" id="j2htmlLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+
+                            <i class="fas fa-sticky-note mr-3"></i>
+                            j2html
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="loginLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+
+                            <i class="fas fa-sticky-note mr-3"></i>
+                            login
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="registrarseLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+
+                            <i class="fas fa-sticky-note mr-3"></i>
+                            registrarse
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="darkmodeLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+
+                            <i class="fas fa-sticky-note mr-3"></i>
+                           Darkmode
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="#" id="jmoordbJ2hmtlLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                            <i class="fas fa-sticky-note mr-3"></i>
+                            JmoordbJ2hmtl
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="countryLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                            <i class="fas fa-sticky-note mr-3"></i>
+                            Country
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="#" id="aboutUsLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                            <i class="fas fa-sticky-note mr-3"></i>
+                            About US
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="tailwindLink"
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                            <i class="fas fa-sticky-note mr-3"></i>
+                            Tailwind
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="chartjsLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                            <i class="fas fa-sticky-note mr-3"></i>
+                            ChartJS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="mapaLink" 
+                           class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                            <i class="fas fa-sticky-note mr-3"></i>
+                            Mapa
+                        </a>
+                    </li>
+                </ul>
+
+
+                <a href="#" id="homeLink" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-calendar mr-3"></i>
+                    Home
+                </a>
+                <hr class="my-1 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+                <a href="#" id="formsLink" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-align-left mr-3"></i>
+                    Forms
+                </a>
+                <a href="#" id="blankLink" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-calendar-alt mr-3"></i>
+                    Blank Page
+                </a>
+
+                <a href="#" id="tableLink" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-table mr-3"></i>
+                    Table
+                </a>
+
+                <a href="#" id="tabsLink" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-tablet-alt mr-3"></i>
+                    Tabbed Content
+                </a>
+
+                <a href="#" id="calendarLink" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-calendar mr-3"></i>
+                    Calendar
+                </a>
+
+
+
+
+
+
+
+
+
+
+
+
+            </nav>
+            <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
+                <i class="fas fa-arrow-circle-up mr-3"></i>
+                Upgrade to Pro!
+            </a>
+        </aside>
+
+        <div class="w-full flex flex-col h-screen overflow-y-hidden">
+            <!-- Desktop Header -->
+            <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
+                <div class="w-1/2"></div>
+                <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                    <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
+                        <!--<img src="https://source.unsplash.com/uJ8LNVCBjFQ/400x400">-->
+
+                        <img
+                            alt="tania andrew"
+                            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+                            class="relative inline-block h-10 w-10 cursor-pointer rounded-full object-cover object-center"
+
+                            title="Componentes"
+                            />
+
+                    </button>
+                    <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
+                    <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
+                        <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
+                        <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
+                        <a href="#" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                    </div>
+                    
+                                    <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+</button>
+                    
+                </div>
+<script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+</script>
+            </header>
+
+            <!-- Mobile Header & Nav -->
+            <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
+                <div class="flex items-center justify-between">
+                    <!--<a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>-->
+                    <a href="#" id="dashboardMainLinkMovil" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Jettra</a>
+                    <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
+                        <i x-show="!isOpen" class="fas fa-bars"></i>
+                        <i x-show="isOpen" class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Dropdown Nav -->
+                <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
+
+
+                    <a href="#" id="dashboardLinkMovil" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        Dashboard
+                    </a>
+                    <a href="#" data-popover-target="menu"  class="flex items-center active-nav-link text-white py-2 pl-6 nav-item">
+                        <i class="fas fa-tv-retro mr-3"></i>
+                        Componentes Movil
+                    </a>
+
+                    <ul
+                        role="menu"
+                        data-popover="menu"
+                        data-popover-placement="bottom"
+                        class="absolute z-10 min-w-[180px] overflow-auto rounded-lg border border-slate-200 bg-blue-900 p-1.5 shadow-lg shadow-sm focus:outline-none"
+                        >
+
+                        <li>
+                            <a href="#" id="empleadoLinkMovil"
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                                <i class="fas fa-calendar mr-3"></i>
+                                Empleado
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="graficaLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                                <i class="fas fa-calendar mr-3"></i>
+                                Grafica
+                            </a>  </li>
+                        <li>
+                            <a href="#" id="j2htmlLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                j2html
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="loginLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="registrarseLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                Registrarse
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="darkmodeLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                Darkmode
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="#" id="jmoordbJ2hmtlLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                JmoordbJ2hmtl
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="countryLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                Country
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="#" id="aboutUsLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                About US
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="tailwindLinkMovil"
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                Tailwind
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="chartjsLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                ChartJS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="mapaLinkMovil" 
+                               class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                                <i class="fas fa-sticky-note mr-3"></i>
+                                Mapa
+                            </a>
+                        </li>
+                    </ul>
+
+
+                    <a href="#" id="homeLinkMovil" 
+                       class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                        <i class="fas fa-calendar mr-3"></i>
+                        Home
+                    </a>
+
+
+                    <a href="#" id="tableLinkMovil" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-6 nav-item">
+                        <i class="fas fa-table mr-3"></i>
+                        Table
+                    </a>
+                    <a href="#" id="tabsLinkMovil" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                        <i class="fas fa-tablet-alt mr-3"></i>
+                        Tabbed Content
+                    </a>
+
+                    <a href="#" id="calendarLinkMovil" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                        <i class="fas fa-calendar mr-3"></i>
+                        Calendar
+                    </a>
+                    <a href="#" id="formsLinkMovil" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                        <i class="fas fa-align-left mr-3"></i>
+                        Forms
+                    </a>
+                    <a href="#" id="blankLinkMovil" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                        <i class="fas fa-sticky-note mr-3"></i>
+                        Blank Page
+                    </a>
+
+
+
+
+
+
+                    <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-2 nav-item">
+                        <i class="fas fa-cogs mr-3"></i>
+                        Support
+                    </a>
+                    <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-2 nav-item">
+                        <i class="fas fa-user mr-3"></i>
+                        My Account
+                    </a>
+                    <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-2 nav-item">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        Sign Out
+                    </a>
+                    <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                        <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
+                    </button>
+                </nav>
+                <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                    <i class="fas fa-plus mr-3"></i> New Report
+                </button> -->
+            </header>
+
+            <div class="w-full overflow-x-hidden border-t flex flex-col" id="content">
+                <main class="w-full flex-grow p-6">
+                    <h1 class="text-3xl text-black pb-6">Dashboard</h1>
+
+                    <div class="flex flex-wrap mt-6">
+                        <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
+                            <p class="text-xl pb-3 flex items-center">
+                                <i class="fas fa-plus mr-3"></i> Monthly Reports
+                            </p>
+                            <div class="p-6 bg-white">
+                                <canvas id="chartOne" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-12 lg:mt-0">
+                            <p class="text-xl pb-3 flex items-center">
+                                <i class="fas fa-check mr-3"></i> Resolved Reports
+                            </p>
+                            <div class="p-6 bg-white">
+                                <canvas id="chartTwo" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full mt-12">
+                        <p class="text-xl pb-3 flex items-center">
+                            <i class="fas fa-list mr-3"></i> Latest Reports
+                        </p>
+                        <div class="bg-white overflow-auto">
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-gray-800 text-white">
+                                    <tr>
+                                        <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
+                                        <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Last name</th>
+                                        <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone</th>
+                                        <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-700">
+                                    <tr>
+                                        <td class="w-1/3 text-left py-3 px-4">Lian</td>
+                                        <td class="w-1/3 text-left py-3 px-4">Smith</td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                    </tr>
+                                    <tr class="bg-gray-200">
+                                        <td class="w-1/3 text-left py-3 px-4">Emma</td>
+                                        <td class="w-1/3 text-left py-3 px-4">Johnson</td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-1/3 text-left py-3 px-4">Oliver</td>
+                                        <td class="w-1/3 text-left py-3 px-4">Williams</td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                    </tr>
+                                    <tr class="bg-gray-200">
+                                        <td class="w-1/3 text-left py-3 px-4">Isabella</td>
+                                        <td class="w-1/3 text-left py-3 px-4">Brown</td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-1/3 text-left py-3 px-4">Lian</td>
+                                        <td class="w-1/3 text-left py-3 px-4">Smith</td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                    </tr>
+                                    <tr class="bg-gray-200">
+                                        <td class="w-1/3 text-left py-3 px-4">Emma</td>
+                                        <td class="w-1/3 text-left py-3 px-4">Johnson</td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-1/3 text-left py-3 px-4">Oliver</td>
+                                        <td class="w-1/3 text-left py-3 px-4">Williams</td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                    </tr>
+                                    <tr class="bg-gray-200">
+                                        <td class="w-1/3 text-left py-3 px-4">Isabella</td>
+                                        <td class="w-1/3 text-left py-3 px-4">Brown</td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
+                                        <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </main>
+
+                <footer class="w-full bg-white text-right p-4">
+                    Built by <a target="_blank" href="https://davidgrzyb.com" class="underline">David Grzyb</a>.
+                </footer>
+            </div>
+
+        </div>
+
+        <!-- AlpineJS -->
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <!-- Font Awesome -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        <!-- ChartJS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+
+        <script>
+            var chartOne = document.getElementById('chartOne');
+            var myChart = new Chart(chartOne, {
+                type: 'bar',
+                data: {
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [{
+                            label: '# of Votes',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    }
+                }
+            });
+
+            var chartTwo = document.getElementById('chartTwo');
+            var myLineChart = new Chart(chartTwo, {
+                type: 'line',
+                data: {
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [{
+                            label: '# of Votes',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                    }
+                }
+            });
+        </script>
+        <!-- Custom script to load content -->
+        <script>
+            $(document).ready(function () {
+                console.log("cargando....");
+                function loadContent(page) {
+                    $('#content').load(page);
+                }
+
+                $('#empleadoLink').on('click', function () {
+                    loadContent('/api/view/empleado');
+                });
+
+                $('#tailwindLink').on('click', function () {
+                    loadContent('/api/view/tailwind');
+                });
+                $('#graficaLink').on('click', function () {
+                    loadContent('/api/view/grafica');
+                });
+                $('#chartjsLink').on('click', function () {
+                    loadContent('/api/view/chartjs');
+                });
+                $('#mapaLink').on('click', function () {
+                    loadContent('/api/view/mapa');
+                });
+
+                $('#j2htmlLink').on('click', function () {
+                    loadContent('/api/view/j2html');
+                });
+                $('#countryLink').on('click', function () {
+                    loadContent('/api/view/country');
+                });
+                $('#loginLink').on('click', function () {
+                    loadContent('/api/view/login');
+                });
+                $('#registrarseLink').on('click', function () {
+                    loadContent('/api/view/registrarse');
+                });
+                $('#darkmodeLink').on('click', function () {
+                    loadContent('/api/view/darkmode');
+                });
+
+                $('#jmoordbJ2hmtlLink').on('click', function () {
+                    loadContent('/api/view/jmoordbj2html');
+                });
+
+                $('#managerLink').on('click', function () {
+                    loadContent('manager.html');
+                });
+                $('#homeLink').on('click', function () {
+                    loadContent('/api/view/home');
+                });
+                $('#aboutUsLink').on('click', function () {
+                    loadContent('/api/view/about');
+                });
+                $('#tableLink').on('click', function () {
+                    loadContent('/api/view/table');
+                });
+                $('#tabsLink').on('click', function () {
+                    loadContent('/api/view/tabs');
+                });
+                $('#calendarLink').on('click', function () {
+                    loadContent('/api/view/calendar');
+                });
+                $('#formsLink').on('click', function () {
+                    loadContent('/api/view/forms');
+                });
+                $('#blankLink').on('click', function () {
+                    loadContent('/api/view/blank');
+                });
+                $('#dashboardLink').on('click', function () {
+                    loadContent('/api/view/dashboard');
+                });
+                $('#dashboardMainLink').on('click', function () {
+                    loadContent('/api/view/dashboard');
+                });
+
+
+
+                $('#dashboardMainLinkMovil').on('click', function () {
+                    loadContent('/api/view/dashboard');
+                });
+                $('#homeLinkMovil').on('click', function () {
+                    loadContent('/api/view/home');
+                });
+
+
+                $('#aboutUsLinkMovil').on('click', function () {
+                    loadContent('/api/view/about');
+                });
+
+                $('#j2htmlLinkMovil').on('click', function () {
+                    loadContent('/api/view/j2html');
+                });
+                $('#loginLinkMovil').on('click', function () {
+                    loadContent('/api/view/login');
+                });
+                $('#registrarseLinkMovil').on('click', function () {
+                    loadContent('/api/view/registrarse');
+                });
+                $('#darkmodeLinkMovil').on('click', function () {
+                    loadContent('/api/view/darkmode');
+                });
+
+                $('#jmoordbJ2hmtlLinkMovil').on('click', function () {
+                    loadContent('/api/view/jmoordbj2html');
+                });
+                $('#countryLinkMovil').on('click', function () {
+                    loadContent('/api/view/country');
+                });
+
+                $('#chartjsLinkMovil').on('click', function () {
+                    loadContent('/api/view/chartjs');
+                });
+
+                $('#empleadoLinkMovil').on('click', function () {
+                    loadContent('/api/view/empleado');
+                });
+                $('#mapaLinkMovil').on('click', function () {
+                    loadContent('/api/view/mapa');
+                });
+                $('#graficaLinkMovil').on('click', function () {
+                    loadContent('/api/view/grafica');
+                });
+                $('#tableLinkMovil').on('click', function () {
+                    loadContent('/api/view/table');
+                });
+                $('#tabsLinkMovil').on('click', function () {
+                    loadContent('/api/view/tabs');
+                });
+                $('#calendarLinkMovil').on('click', function () {
+                    loadContent('/api/view/calendar');
+                });
+                $('#formsLinkMovil').on('click', function () {
+                    loadContent('/api/view/forms');
+                });
+                $('#blankLinkMovil').on('click', function () {
+                    loadContent('/api/view/blank');
+                });
+                $('#dashboardLinkMovil').on('click', function () {
+                    loadContent('/api/view/dashboard');
+                });
+                $('#tailwindLinkMovil').on('click', function () {
+                    loadContent('/api/view/tailwind');
+                });
+
+
+                loadContent('/api/view/home');
+
+            });
+
+        </script>
+        <script>
+            $("p").on("click", function () {
+                $(this).slideUp();
+            });
+        </script>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Obtener todas las opciones principales con desplegables
+                const opcionesConDesplegable = document.querySelectorAll(".opcion-con-desplegable");
+
+                // Agregar evento de clic a cada opción principal
+                opcionesConDesplegable.forEach(function (opcion) {
+                    opcion.addEventListener("click", function () {
+                        // Obtener el desplegable asociado a la opción
+                        const desplegable = opcion.querySelector(".desplegable");
+
+                        // Alternar la clase "hidden" para mostrar u ocultar el desplegable
+                        desplegable.classList.toggle("hidden");
+                    });
+                });
+            });
+
+
+            const dropdownButton = document.querySelector('.relative > button');
+            const dropdownContent = document.querySelector('.hidden');
+
+            dropdownButton.addEventListener('click', () => {
+                dropdownContent.classList.toggle('hidden');
+            });
+        </script>
+        
+      
+    </body>
+</html>
