@@ -4,10 +4,10 @@
  */
 package com.avbravo.cdihttp.repository.implementation;
 
-import com.avbravo.cdihttp.cdi.Singleton;
 import com.avbravo.cdihttp.db.DB;
 import com.avbravo.cdihttp.model.User;
 import com.avbravo.cdihttp.repository.UserRepository;
+import com.avbravo.jettraframework.cdi.Singleton;
 
 /**
  *

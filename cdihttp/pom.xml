@@ -107,4 +107,11 @@
             </build>
         </profile>
     </profiles>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jettraframework</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

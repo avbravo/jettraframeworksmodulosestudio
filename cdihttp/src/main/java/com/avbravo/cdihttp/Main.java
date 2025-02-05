@@ -4,8 +4,8 @@
 
 package com.avbravo.cdihttp;
 
-import com.avbravo.cdihttp.cdi.application.Application;
 import com.avbravo.cdihttp.db.DB;
+import com.avbravo.jettraframework.cdi.container.JettraConfigApplication;
 import java.util.ArrayList;
 
 /**
@@ -19,9 +19,9 @@ public class Main {
         
         DB.country = new ArrayList<>();
         DB.user = new ArrayList<>();
-        Application.initialize("com.avbravo.cdihttp.repository");
-        Application.initialize("com.avbravo.cdihttp.repository.implementation");
-        Application.initialize("com.avbravo.cdihttp.service");
+        JettraConfigApplication.initialize("com.avbravo.cdihttp.repository");
+        JettraConfigApplication.initialize("com.avbravo.cdihttp.repository.implementation");
+        JettraConfigApplication.initialize("com.avbravo.cdihttp.service");
 
         // Iniciar el servidor HTTP
         HttpServerApp.startServer();

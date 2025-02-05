@@ -8,9 +8,10 @@ package com.avbravo.cdihttp;
  *
  * @author avbravo
  */
-import com.avbravo.cdihttp.cdi.application.Application;
+
 import com.avbravo.cdihttp.service.CountryService;
 import com.avbravo.cdihttp.service.UserService;
+import com.avbravo.jettraframework.cdi.container.JettraConfigApplication;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
@@ -48,7 +49,7 @@ public class HttpServerApp {
     }
 
     private static void handleAddUser(HttpExchange exchange) throws IOException {
-        UserService userService = Application.getBean(UserService.class);
+        UserService userService = JettraConfigApplication.getBean(UserService.class);
 
         if ("POST".equals(exchange.getRequestMethod())) {
             String user = new String(exchange.getRequestBody().readAllBytes());
@@ -61,7 +62,7 @@ public class HttpServerApp {
     }
 
     private static void handleGetUser(HttpExchange exchange) throws IOException {
-        UserService userService = Application.getBean(UserService.class);
+        UserService userService = JettraConfigApplication.getBean(UserService.class);
 
         if ("GET".equals(exchange.getRequestMethod())) {
             String id = exchange.getRequestURI().getQuery().split("=")[1];
@@ -74,7 +75,7 @@ public class HttpServerApp {
     }
    
     private static void handleAddCountry(HttpExchange exchange) throws IOException {
-        CountryService countryService = Application.getBean(CountryService.class);
+        CountryService countryService = JettraConfigApplication.getBean(CountryService.class);
 
         if ("POST".equals(exchange.getRequestMethod())) {
             String country = new String(exchange.getRequestBody().readAllBytes());
@@ -87,7 +88,7 @@ public class HttpServerApp {
     }
 
     private static void handleGetCountry(HttpExchange exchange) throws IOException {
-        CountryService countryService = Application.getBean(CountryService.class);
+        CountryService countryService = JettraConfigApplication.getBean(CountryService.class);
 
         if ("GET".equals(exchange.getRequestMethod())) {
             String id = exchange.getRequestURI().getQuery().split("=")[1];

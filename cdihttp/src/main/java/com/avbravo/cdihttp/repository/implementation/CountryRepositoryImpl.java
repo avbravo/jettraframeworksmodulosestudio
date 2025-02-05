@@ -4,8 +4,8 @@
  */
 package com.avbravo.cdihttp.repository.implementation;
 
-import com.avbravo.cdihttp.cdi.Singleton;
 import com.avbravo.cdihttp.repository.CountryRepository;
+import com.avbravo.jettraframework.cdi.Singleton;
 
 /**
  *

@@ -4,9 +4,9 @@
  */
 package com.avbravo.cdihttp.service;
 
-import com.avbravo.cdihttp.cdi.Inject;
-import com.avbravo.cdihttp.cdi.Prototype;
 import com.avbravo.cdihttp.repository.CountryRepository;
+import com.avbravo.jettraframework.cdi.Inject;
+import com.avbravo.jettraframework.cdi.Prototype;
 
 /**
  *
