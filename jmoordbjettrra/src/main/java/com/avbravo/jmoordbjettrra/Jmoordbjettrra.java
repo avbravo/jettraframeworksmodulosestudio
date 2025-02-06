@@ -1,7 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package com.avbravo.jmoordbjettrra;
 
 import com.avbravo.jettraframework.JettraFramework;
@@ -20,25 +19,20 @@ public class Jmoordbjettrra {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        
+
         /*
         Carga la configuracion para @CDI
-        */
-                    JettraConfigApplication.initialize("com.avbravo.jmoordbjettrra.repository");
+         */
+        JettraConfigApplication.initialize("com.avbravo.jmoordbjettrra.repository");
         JettraConfigApplication.initialize("com.avbravo.jmoordbjettrra.repository.implementation");
         JettraConfigApplication.initialize("com.avbravo.jmoordbjettrra.produces");
-        
-        
-          List<JettraContext> jettraContexts = new ArrayList<>();
+
+        List<JettraContext> jettraContexts = new ArrayList<>();
         jettraContexts.add(new JettraContext("/country", new CountryHandler()));
         jettraContexts.add(new JettraContext("/country/", new CountryHandler()));
-        
-        
 
-
-        
-          String host="localhost";
-           JettraFramework local = new JettraFramework.Builder()
+        String host = "localhost";
+        JettraFramework local = new JettraFramework.Builder()
                 .protocol(Protocol.HTTP)
                 .port(8080)
                 .logo(Boolean.TRUE)
