@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author avbravo
  */
-public class Jmoordbjettrra {
+public class Start {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
@@ -26,10 +26,12 @@ public class Jmoordbjettrra {
         JettraConfigApplication.initialize("com.avbravo.jmoordbjettrra.repository");
         JettraConfigApplication.initialize("com.avbravo.jmoordbjettrra.repository.implementation");
         JettraConfigApplication.initialize("com.avbravo.jmoordbjettrra.produces");
+        JettraConfigApplication.initialize("com.avbravo.jmoordbjettrra.controller");
 
         List<JettraContext> jettraContexts = new ArrayList<>();
         jettraContexts.add(new JettraContext("/country", new CountryHandler()));
         jettraContexts.add(new JettraContext("/country/", new CountryHandler()));
+      
 
         String host = "localhost";
         JettraFramework local = new JettraFramework.Builder()

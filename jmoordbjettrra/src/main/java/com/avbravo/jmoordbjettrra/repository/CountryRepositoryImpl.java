@@ -4,6 +4,7 @@ package com.avbravo.jmoordbjettrra.repository;
 import com.avbravo.jettraframework.cdi.ApplicationScoped;
 import com.avbravo.jettraframework.cdi.Inject;
 import com.avbravo.jettraframework.cdi.PostConstruct;
+import com.avbravo.jettraframework.cdi.Singleton;
 import com.avbravo.jettraframework.config.JettraConfig;
 /**
 * MongoDB
@@ -11,37 +12,26 @@ import com.avbravo.jettraframework.config.JettraConfig;
 import com.jmoordb.core.processor.model.JmoordbException;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.and;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import org.bson.Document;
-import com.mongodb.client.model.FindOneAndUpdateOptions;
-import com.mongodb.client.model.ReturnDocument;
 import com.mongodb.client.result.InsertOneResult;
-import org.bson.BsonInt64;
 import org.bson.conversions.Bson;
-import org.bson.BsonDocument;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.UpdateResult;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.ListIndexesIterable;
 import com.mongodb.client.MongoIterable;
-import org.bson.types.ObjectId;
 /**
 * Java
 */
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import java.util.Optional;
-import java.util.function.Supplier;
 import com.jmoordb.core.util.MessagesUtil;
 import com.jmoordb.core.model.Pagination;
 import com.jmoordb.core.model.Sorted;
-import com.jmoordb.core.util.JmoordbCoreDateUtil;
-import java.util.HashSet;
 import com.avbravo.jmoordbjettrra.model.Country;
 
 

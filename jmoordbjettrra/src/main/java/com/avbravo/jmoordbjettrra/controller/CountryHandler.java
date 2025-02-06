@@ -4,8 +4,10 @@
  */
 package com.avbravo.jmoordbjettrra.controller;
 import com.avbravo.jettraframework.cdi.Inject;
+import com.avbravo.jettraframework.cdi.Prototype;
 import com.avbravo.jmoordbjettrra.model.Country;
 import com.avbravo.jmoordbjettrra.repository.CountryRepository;
+import com.avbravo.jmoordbjettrra.repository.CountryRepositoryImpl;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author avbravo
  */
+@Prototype
 public class CountryHandler    implements HttpHandler {
     @Inject
     CountryRepository countryRepository;

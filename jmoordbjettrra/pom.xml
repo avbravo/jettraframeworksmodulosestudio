@@ -8,7 +8,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
-        <exec.mainClass>com.avbravo.jmoordbjettrra.Jmoordbjettrra</exec.mainClass>
+        <exec.mainClass>com.avbravo.jmoordbjettrra.Start</exec.mainClass>
          <version.jmoordbcore>2.0.2</version.jmoordbcore>
     </properties>
     

@@ -15,6 +15,7 @@ import com.avbravo.jettraframework.config.JettraConfig;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import java.io.Serializable;
+import com.avbravo.jettraframework.cdi.ViewScoped;
 
 @ApplicationScoped
 //@DateSupport(jakartaSource = JakartaSource.JAKARTA)
@@ -29,7 +30,7 @@ private String mongodburi =getMicroprofileConfig("mongodb.uri");
 
 
     @Produces
-    @ApplicationScoped
+    @ViewScoped
     public MongoClient mongoClient() {      
         MongoClient mongoClient = MongoClients.create(mongodburi);
        return mongoClient;
