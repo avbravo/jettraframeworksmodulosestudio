@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.avbravo.jmoordbjettrra.controller;
+import com.avbravo.jettraframework.cdi.Inject;
 import com.avbravo.jmoordbjettrra.model.Country;
+import com.avbravo.jmoordbjettrra.repository.CountryRepository;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 
@@ -18,6 +20,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author avbravo
  */
 public class CountryHandler    implements HttpHandler {
+    @Inject
+    CountryRepository countryRepository;
+    
     private static final List<Country> countrys = new ArrayList<>();
     private static final ObjectMapper objectMapper = new ObjectMapper();
         @Override
@@ -26,13 +31,13 @@ public class CountryHandler    implements HttpHandler {
             String path = exchange.getRequestURI().getPath();
 
             try {
-                if (method.equalsIgnoreCase("GET") && path.equals("/countrys")) {
+                if (method.equalsIgnoreCase("GET") && path.equals("/country")) {
                     handleGetAllCountrys(exchange);
-                } else if (method.equalsIgnoreCase("GET") && path.startsWith("/countrys/")) {
+                } else if (method.equalsIgnoreCase("GET") && path.startsWith("/country/")) {
                     handleGetCountryById(exchange);
-                } else if (method.equalsIgnoreCase("POST") && path.equals("/countrys")) {
+                } else if (method.equalsIgnoreCase("POST") && path.equals("/country")) {
                     handleCreateCountry(exchange);
-                } else if (method.equalsIgnoreCase("DELETE") && path.startsWith("/countrys/")) {
+                } else if (method.equalsIgnoreCase("DELETE") && path.startsWith("/country/")) {
                     handleDeleteCountry(exchange);
                 } else {
                     sendResponse(exchange, 404, "Endpoint no encontrado");
@@ -45,7 +50,9 @@ public class CountryHandler    implements HttpHandler {
         private void handleGetAllCountrys(HttpExchange exchange) throws IOException {
             
           //  countrys.add(new Country("avbravo","aristides","avbravo@gmail.com"));
-            String jsonResponse = objectMapper.writeValueAsString(countrys);
+//            String jsonResponse = objectMapper.writeValueAsString(countrys);
+         List<Country> countrys= countryRepository.findAll();
+             String jsonResponse = objectMapper.writeValueAsString(countrys);
             sendResponse(exchange, 200, jsonResponse);
         }
 
