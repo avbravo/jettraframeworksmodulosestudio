@@ -12,14 +12,12 @@ import com.avbravo.jettraframework.cdi.ApplicationScoped;
 import com.avbravo.jettraframework.cdi.Disposes;
 import com.avbravo.jettraframework.cdi.Produces;
 import com.avbravo.jettraframework.config.JettraConfig;
-import com.jmoordb.core.annotation.DateSupport;
-import com.jmoordb.core.annotation.enumerations.JakartaSource;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import java.io.Serializable;
 
 @ApplicationScoped
-@DateSupport(jakartaSource = JakartaSource.JAKARTA)
+//@DateSupport(jakartaSource = JakartaSource.JAKARTA)
 public class MongoDBProducer implements Serializable, JettraConfig {
 
 //    @Inject

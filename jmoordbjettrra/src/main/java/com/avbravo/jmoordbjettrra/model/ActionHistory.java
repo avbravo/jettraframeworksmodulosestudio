@@ -6,6 +6,7 @@ package com.avbravo.jmoordbjettrra.model;
 
 import com.jmoordb.core.annotation.Column;
 import com.jmoordb.core.annotation.DocumentEmbeddable;
+import com.jmoordb.core.annotation.enumerations.JakartaSource;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ import java.util.Objects;
  *
  * @author avbravo
  */
-@DocumentEmbeddable
+@DocumentEmbeddable(jakartaSource = JakartaSource.JETTRA)
 public class ActionHistory {
 
    @Column
