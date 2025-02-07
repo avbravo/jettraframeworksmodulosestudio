@@ -8,6 +8,7 @@ import com.avbravo.jettraframework.cdi.container.JettraConfigApplication;
 import com.avbravo.jettraframework.enumerations.Protocol;
 import com.avbravo.jettraframework.model.JettraContext;
 import com.avbravo.jmoordbjettrra.controller.CountryHandler;
+import com.avbravo.jmoordbjettrra.controller.UserHandler;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class Start {
         List<JettraContext> jettraContexts = new ArrayList<>();
         jettraContexts.add(new JettraContext("/country", new CountryHandler()));
         jettraContexts.add(new JettraContext("/country/", new CountryHandler()));
+        jettraContexts.add(new JettraContext("/user", new UserHandler()));
+        jettraContexts.add(new JettraContext("/user/", new UserHandler()));
       
 
         String host = "localhost";

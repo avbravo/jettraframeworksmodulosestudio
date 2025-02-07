@@ -4,7 +4,6 @@ package com.avbravo.jmoordbjettrra.repository;
 import com.avbravo.jettraframework.cdi.ApplicationScoped;
 import com.avbravo.jettraframework.cdi.Inject;
 import com.avbravo.jettraframework.cdi.PostConstruct;
-import com.avbravo.jettraframework.cdi.Singleton;
 import com.avbravo.jettraframework.config.JettraConfig;
 /**
 * MongoDB

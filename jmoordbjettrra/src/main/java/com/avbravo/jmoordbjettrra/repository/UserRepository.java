@@ -4,6 +4,9 @@
  */
 package com.avbravo.jmoordbjettrra.repository;
 
+import com.avbravo.jmoordbjettrra.model.User;
+import java.util.List;
+
 /**
  *
  * @author avbravo
@@ -11,4 +14,5 @@ package com.avbravo.jmoordbjettrra.repository;
 public interface UserRepository {
     void save(String user);
     String find(String id);
+    List<User> findAll();
 }

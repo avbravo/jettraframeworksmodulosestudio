@@ -11,11 +11,12 @@ package com.avbravo.jmoordbjettrra.produces;
 import com.avbravo.jettraframework.cdi.ApplicationScoped;
 import com.avbravo.jettraframework.cdi.Disposes;
 import com.avbravo.jettraframework.cdi.Produces;
+import com.avbravo.jettraframework.cdi.ViewScoped;
 import com.avbravo.jettraframework.config.JettraConfig;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import java.io.Serializable;
-import com.avbravo.jettraframework.cdi.ViewScoped;
+
 
 @ApplicationScoped
 //@DateSupport(jakartaSource = JakartaSource.JAKARTA)

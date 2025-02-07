@@ -7,6 +7,7 @@ package com.avbravo.jmoordbjettrra.repository;
 import com.avbravo.jettraframework.cdi.Singleton;
 import com.avbravo.jmoordbjettrra.DB;
 import com.avbravo.jmoordbjettrra.model.User;
+import java.util.List;
 
 /**
  *
@@ -26,6 +27,11 @@ public class UserRepositoryImpl implements UserRepository {
         System.out.println("Finding user with ID: " + id);
         return DB.user.getLast().getId()+ " "+DB.user.getLast().getName();
 //        return "User-" + id;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return DB.user;
     }
     
 }
