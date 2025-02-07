@@ -570,10 +570,10 @@ Una vez que el servidor esté en ejecución, puedes probar los endpoints utiliza
 
 2. **Obtener un Usuario**
    - Método: `GET`
-   - URL: `http://localhost:8080/users/get?id=123`
+   - URL: `http://localhost:8080/users/get?id=%22a%22`
 
    ```bash
-   curl -X GET "http://localhost:8080/users/get?id=123"
+   curl -X GET "http://localhost:8080/users/get?id=%22a%22"
    ```
 
 3. **Agregar un País**
