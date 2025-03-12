@@ -55,7 +55,7 @@ public class CountryController implements Serializable, JettraConfig {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response add(Country country) throws URISyntaxException {
         Optional<Country> countryResult = countryRepository.save(country);
-        URI uri = new URI("/country/" + countryResult.get().getIdcountry());
+        URI uri = new URI("/country/" + countryResult.get().idcountry());
         return Response.created(uri).build();
     }
 

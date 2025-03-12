@@ -6,7 +6,6 @@ package com.avbravo.jettraserverhelloworld.model;
 
 import com.jmoordb.core.annotation.Column;
 import com.jmoordb.core.annotation.Embedded;
-import com.jmoordb.core.annotation.Entity;
 import com.jmoordb.core.annotation.Id;
 import java.util.List;
 import java.util.Objects;
@@ -15,48 +14,13 @@ import java.util.Objects;
  *
  * @author avbravo
  */
-@Entity()
-public class Country {
+//@Entity()
 
-    @Id
-    private String idcountry;
-    @Column
-    private String country;
-@Embedded
-List<ActionHistory> actionHistory;
-    public Country() {
-    }
+public record Country ( @Id   String idcountry,    @Column String country,@Embedded List<ActionHistory> actionHistory){
 
-    public Country(String idcountry, String country, List<ActionHistory> actionHistory) {
-        this.idcountry = idcountry;
-        this.country = country;
-        this.actionHistory = actionHistory;
-    }
-
-    public String getIdcountry() {
-        return idcountry;
-    }
-
-    public void setIdcountry(String idcountry) {
-        this.idcountry = idcountry;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public List<ActionHistory> getActionHistory() {
-        return actionHistory;
-    }
-
-    public void setActionHistory(List<ActionHistory> actionHistory) {
-        this.actionHistory = actionHistory;
-    }
-
+//     Country withName(String country) {
+//        return new Country(  idcountry,   country, @Embedded List<ActionHistory> actionHistory);
+//    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
